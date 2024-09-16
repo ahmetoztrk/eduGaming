@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduGaming - Home</title>
+    <style>
+        /* Genel stiller */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Navbar stilleri */
+        .navbar {
+            background-color: #4CAF50;
+            overflow: hidden;
+            padding: 10px;
+        }
+
+        .navbar a {
+            float: left;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: #45a049;
+        }
+
+        .navbar img {
+            float: left;
+            margin-right: 10px;
+            width: 40px;
+            height: 40px;
+        }
+
+        .navbar .auth-buttons {
+            float: right;
+        }
+
+        .navbar .auth-buttons button {
+            margin-left: 10px;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .navbar .auth-buttons button:hover {
+            background-color: #555;
+        }
+
+        /* Ana içerik */
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .game-download-btn {
+            display: block;
+            margin-top: 20px;
+            padding: 15px 30px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            font-size: 1.2em;
+            border-radius: 5px;
+        }
+
+        .game-download-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
+
+        /* Color Blind Mode */
+        .color-blind-mode {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            cursor: pointer;
+            border: none;
+            font-size: 1em;
+        }
+
+        .color-blind-mode:hover {
+            background-color: #555;
+        }
+
+        /* Color Blind Mode aktif olduğunda uygulanacak stiller */
+        .color-blind-active {
+            background-color: #EFEFEF;
+            color: #000;
+        }
+
+        .color-blind-active .navbar {
+            background-color: #2c3e50;
+        }
+
+        .color-blind-active .navbar a {
+            background-color: #2c3e50;
+            color: #FFF;
+        }
+
+        .color-blind-active .game-download-btn {
+            background-color: #555;
+            color: #FFF;
+        }
+
+        .color-blind-active .game-download-btn:hover {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="#"><img src="https://via.placeholder.com/40" alt="EduGaming Logo"></a>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="#games">Games</a>
+        <a href="#contact">Contact</a>
+        <div class="auth-buttons">
+            <button onclick="window.location.href='/register';">Register</button>
+            <button onclick="window.location.href='/login';">Login</button>
+        </div>
+    </div>
+
+    <!-- Ana İçerik -->
+    <div class="container">
+        <h1>Welcome to EduGaming!</h1>
+        <p>At EduGaming, we believe that learning can be fun and interactive. Explore our collection of educational games that will challenge your mind and help you grow in knowledge. Whether you're improving your math skills or diving into science, our games are designed to be engaging for all ages.</p>
+        
+        <!-- Oyun İndirme Butonu -->
+        <a href="/download-game" class="game-download-btn">Download the Game Now</a>
+
+        <!-- Color Blind Mode -->
+        <button class="color-blind-mode" onclick="toggleColorBlindMode()">Enable Color Blind Mode</button>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 EduGaming. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        function toggleColorBlindMode() {
+            document.body.classList.toggle('color-blind-active');
+        }
+    </script>
+</body>
+</html>

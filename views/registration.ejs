@@ -1,0 +1,248 @@
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduGaming - Registration</title>
+    <style>
+        /* Genel sayfa ayarları */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Form kutusu stili */
+        .registration-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
+        }
+
+        /* Başlık stili */
+        .registration-container h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Form elemanları stili */
+        .registration-container input {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* Kayıt butonu stili */
+        .registration-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .registration-container button:hover {
+            background-color: #45a049;
+        }
+
+        /* Medya sorguları: küçük ekranlarda görünümü iyileştir */
+        @media (max-width: 400px) {
+            .registration-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="registration-container">
+        <h1>Register</h1>
+        <form action="/register" method="POST">
+            <label for="fullname">Full Name:</label>
+            <input type="text" id="fullname" name="fullname" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="age">Age:</label>
+            <select id="age" name="age" required>
+                <option value="">Select your age</option>
+                <% for (let i = 13; i <= 20; i++) { %>
+                    <option value="<%= i %>"><%= i %></option>
+                <% } %>
+            </select>
+            
+            <div style="margin-top: 0.5cm ;">
+            <label for="school">School:</label>
+            <input type="text" id="school" name="school" required>
+</div>
+            <button type="submit">Register</button>
+        </form>
+
+    </div>
+</body>
+</html>
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduGaming - Registration</title>
+    <style>
+        /* Genel sayfa ayarları */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Form kutusu stili */
+        .registration-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
+        }
+
+        /* Başlık stili */
+        .registration-container h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Form elemanları stili */
+        .registration-container input,
+        .registration-container select {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* Kayıt butonu stili */
+        .registration-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .registration-container button:hover {
+            background-color: #45a049;
+        }
+
+        /* Colorblind Mode Styles */
+        .colorblind-mode {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .colorblind-mode .registration-container {
+            background-color: #fafafa;
+            border: 2px solid #000000;
+        }
+
+        .colorblind-mode .registration-container input,
+        .colorblind-mode .registration-container select {
+            border: 1px solid #000000;
+        }
+
+        .colorblind-mode .registration-container button {
+            background-color: #000000;
+            color: white;
+        }
+
+        .colorblind-mode .registration-container button:hover {
+            background-color: #000000;
+        }
+
+        /* Medya sorguları: küçük ekranlarda görünümü iyileştir */
+        @media (max-width: 400px) {
+            .registration-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="registration-container">
+        <h1>Register</h1>
+        <form action="/register" method="POST">
+            <label for="fullname">Full Name:</label>
+            <input type="text" id="fullname" name="fullname" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="age">Age:</label>
+            <select id="age" name="age" required>
+                <option value="">Select your age</option>
+                <% for (let i = 13; i <= 20; i++) { %>
+                    <option value="<%= i %>"><%= i %></option>
+                <% } %>
+            </select>
+
+            <label for="role">Role:</label>
+  <select name="role">
+    <option value="student">Student</option>
+    <option value="teacher">Teacher</option>
+  </select><br><br>
+
+            
+            <div style="margin-top: 0.5cm;">
+                <label for="school">School:</label>
+                <input type="text" id="school" name="school" required>
+            </div>
+
+            <button type="submit">Register</button>
+        </form>
+        <!-- Colorblind Mode Button -->
+        <button id="colorblindButton" style="margin-top: 15px;">Toggle Colorblind Mode</button>
+    </div>
+
+    <script>
+        // JavaScript to toggle colorblind mode
+        document.getElementById('colorblindButton').addEventListener('click', function() {
+            document.body.classList.toggle('colorblind-mode');
+        });
+    </script>
+</body>
+</html>
