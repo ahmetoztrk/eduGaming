@@ -1,27 +1,29 @@
-const express = require('express');
-const mysql = require('mysql2');
-const bodyParser = require('body-parser');
-const session = require('express-session');
-const path = require('path');
-require('dotenv').config();
+const express = require("express");
+const mysql = require("mysql2");
+const bodyParser = require("body-parser");
+const session = require("express-session");
+const path = require("path");
+require("dotenv").config();
 
 // Express uygulaması oluştur
 const app = express();
 const port = 3000;
 
 // Statik dosyalar için public dizinini kullan
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
-app.use(express.static('public'));
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Session yapılandırması
-app.use(session({
-  secret: 'asd123', // Bu kısmı güçlü bir secret key ile değiştirin
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: false } // HTTPS kullanıyorsanız 'true' yapabilirsiniz
-}));
+app.use(
+  session({
+    secret: "asd123", // Bu kısmı güçlü bir secret key ile değiştirin
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }, // HTTPS kullanıyorsanız 'true' yapabilirsiniz
+  })
+);
 
 // MySQL veritabanı bağlantısı
 const db = mysql.createConnection({
@@ -34,46 +36,47 @@ const db = mysql.createConnection({
 // Veritabanı bağlantısını kontrol et
 db.connect((err) => {
   if (err) {
-    console.error('Database connection failed: ' + err.stack);
+    console.error("Database connection failed: " + err.stack);
     return;
   }
-  console.log('Connected to MySQL database.');
+  console.log("Connected to MySQL database.");
 });
 
 // Ana Sayfa Yönlendirmesi
-app.get('/', (req, res) => {
-  res.render('index')
-  res.sendFile(__dirname + '/views/register');
+app.get("/", (req, res) => {
+  res.render("index");
+  res.sendFile(__dirname + "/views/register");
 });
-app.get('/register', (req,res) => {
-  res.render('registration')
-})
+app.get("/register", (req, res) => {
+  res.render("registration");
+});
 
 // About Sayfası Yönlendirmesi
-app.get('/about', (req, res) => {
-  res.render('about');  // 'about.ejs' dosyasını render ediyoruz
+app.get("/about", (req, res) => {
+  res.render("about"); // 'about.ejs' dosyasını render ediyoruz
 });
 
 // Kullanıcı Kaydı (Örnek İşlev)
-app.post('/register', (req, res) => {
-  const { email, password, fullname, age, school ,role } = req.body;
+app.post("/register", (req, res) => {
+  const { email, password, fullname, age, school, role } = req.body;
 
   // Kullanıcı bilgilerini veritabanına ekle
-  const query = 'INSERT INTO user (email, password, fullname, age, school, role) VALUES (?, ?, ?, ?, ?, ?)';
+  const query =
+    "INSERT INTO user (email, password, fullname, age, school, role) VALUES (?, ?, ?, ?, ?, ?)";
 
-
-
-
-
-  db.query(query, [email, password, fullname, age, school, role], (err, results) => {
-    if (err) {
-      console.error('Error occurred during registration:', err);
-      res.status(500).send('Error occurred during registration.');
-    } else {
-      //res.status(200).send('Registration successful!');
-      res.render('index')
+  db.query(
+    query,
+    [email, password, fullname, age, school, role],
+    (err, results) => {
+      if (err) {
+        console.error("Error occurred during registration:", err);
+        res.status(500).send("Error occurred during registration.");
+      } else {
+        //res.status(200).send('Registration successful!');
+        res.render("index");
+      }
     }
-  });
+  );
 });
 /*
 app.post('/register', (req, res) => {
@@ -106,13 +109,14 @@ app.post('/register', (req, res) => {
 });
 */
 
-
-app.get('/teacher/dashboard', (req, res) => {
+app.get("/teacher/dashboard", (req, res) => {
   // Sadece öğretmenler bu sayfayı görebilmeli, role kontrolü ekleyin
   const role = req.session.role; // Session'da öğretmen olup olmadığı kontrol edilmeli
 
-  if (role !== 'teacher') {
-    return res.status(403).send('Access denied. Only teachers can access this page.');
+  if (role !== "teacher") {
+    return res
+      .status(403)
+      .send("Access denied. Only teachers can access this page.");
   }
 
   // Öğrenciler ve oyunlarını veritabanından çek
@@ -123,20 +127,18 @@ app.get('/teacher/dashboard', (req, res) => {
 
   db.query(query, (err, results) => {
     if (err) {
-      console.error('Database error:', err);
-      return res.status(500).send('Error fetching data from the database.');
+      console.error("Database error:", err);
+      return res.status(500).send("Error fetching data from the database.");
     }
 
     // Verileri EJS template'e gönder ve dashboard'u render et
-    res.render('teacher_dashboard', { students: results });
+    res.render("teacher_dashboard", { students: results });
   });
 });
 
-
-
 // Login Sayfası Yönlendirmesi
-app.get('/login', (req, res) => {
-  res.render('login');
+app.get("/login", (req, res) => {
+  res.render("login");
 });
 
 // Login İsteklerini İşleyen POST Yönlendirmesi
@@ -170,7 +172,7 @@ app.post('/login', (req, res) => {
   //const query = 'SELECT * FROM users WHERE email = ? AND password = ? AND role = ?';
   const query = 'SELECT * FROM users WHERE email = ? AND password = ?';
   
-  db.query(query, [email, password, /*role*//*], (err, results) => {
+  db.query(query, [email, password, /*role*/ /*], (err, results) => {
     if (err) {
       console.error('Database error: ', err);
       return res.status(500).send('Database error occurred');
@@ -193,15 +195,15 @@ app.post('/login', (req, res) => {
 });
 */
 
-app.post('/login', (req, res) => {
+app.post("/login", (req, res) => {
   const { email, password } = req.body;
 
   // Veritabanından kullanıcıyı bul
-  const query = 'SELECT * FROM user WHERE email = ? AND password = ?';
+  const query = "SELECT * FROM user WHERE email = ? AND password = ?";
   db.query(query, [email, password], (err, results) => {
     if (err) {
       console.error(err);
-      return res.send('Error during login.');
+      return res.send("Error during login.");
     }
 
     if (results.length > 0) {
@@ -210,31 +212,88 @@ app.post('/login', (req, res) => {
       // Kullanıcı bilgilerini session'a kaydet
       req.session.userId = user.id;
       req.session.role = user.role; // Kullanıcının rolünü session'a kaydediyoruz
-      
-      // Session'ın doğru kaydedildiğini görmek için log ekleyin
-      console.log('Session:', req.session);
 
-      if (user.role === 'teacher') {
-        res.redirect('/teacher/dashboard');
+      // Session'ın doğru kaydedildiğini görmek için log ekleyin
+      console.log("Session:", req.session);
+
+      if (user.role === "teacher") {
+        res.redirect("/teacher/dashboard");
       } else {
-        res.redirect('/student/dashboard'); // Öğrenci yönlendirmesi
+        res.redirect("/student/dashboard"); // Öğrenci yönlendirmesi
       }
     } else {
-      res.send('Invalid email or password.');
+      res.send("Invalid email or password.");
     }
   });
 });
 
-app.get('/logout', (req, res) => {
+app.get("/add-student", (req, res) => {
+  res.render("add_student");
+});
+
+app.post("/add-student", (req, res) => {
+  const { fullname, email, game_name, score } = req.body;
+  const query =
+    "INSERT INTO user (fullname, email, game_name, score) VALUES (?, ?, ?, ?)";
+  db.query(query, [fullname, email, game_name, score], (err, result) => {
+    if (err) {
+      console.error(err);
+      return res.send("Error adding student.");
+    }
+    res.redirect("/teacher/dashboard");
+  });
+});
+
+app.get("/update-student/:id", (req, res) => {
+  const studentId = req.params.id;
+  const query = "SELECT * FROM user WHERE id = ?";
+  db.query(query, [studentId], (err, result) => {
+    if (err) {
+      console.error(err);
+      return res.send("Error fetching student data.");
+    }
+    res.render("update_student", { student: result[0] });
+  });
+});
+
+app.put("/update-student/:id", (req, res) => {
+  const studentId = req.params.id;
+  const { fullname, email, game_name, score } = req.body;
+  const query =
+    "UPDATE user SET fullname = ?, email = ?, game_name = ?, score = ? WHERE id = ?";
+  db.query(
+    query,
+    [fullname, email, game_name, score, studentId],
+    (err, result) => {
+      if (err) {
+        console.error(err);
+        return res.send("Error updating student.");
+      }
+      res.redirect("/teacher/dashboard");
+    }
+  );
+});
+
+app.get("/delete-student/:id", (req, res) => {
+  const studentId = req.params.id;
+  const query = "DELETE FROM user WHERE id = ?";
+  db.query(query, [id], (err, result) => {
+    if (err) {
+      console.error(err);
+      return res.send("Error deleting student.");
+    }
+    res.redirect("/teacher/dashboard");
+  });
+});
+
+app.get("/logout", (req, res) => {
   req.session.destroy((err) => {
     if (err) {
       return console.error(err);
     }
-    res.redirect('/');
+    res.redirect("/");
   });
 });
-
-
 
 // Sunucuyu Başlat
 app.listen(port, () => {
