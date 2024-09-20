@@ -5,6 +5,8 @@ const session = require("express-session");
 const path = require("path");
 require("dotenv").config();
 
+const pageRoute = require('./routes/pageRouter');
+
 // Express uygulaması oluştur
 const app = express();
 const port = 3000;
@@ -52,9 +54,9 @@ app.get("/register", (req, res) => {
 });
 
 // About Sayfası Yönlendirmesi
-app.get("/about", (req, res) => {
+/*app.get("/about", (req, res) => {
   res.render("about"); // 'about.ejs' dosyasını render ediyoruz
-});
+});*/
 
 // Kullanıcı Kaydı (Örnek İşlev)
 app.post("/register", (req, res) => {
@@ -137,9 +139,11 @@ app.get("/teacher/dashboard", (req, res) => {
 });
 
 // Login Sayfası Yönlendirmesi
-app.get("/login", (req, res) => {
+/*app.get("/login", (req, res) => {
   res.render("login");
-});
+});*/
+
+app.use('/', pageRoute);
 
 // Login İsteklerini İşleyen POST Yönlendirmesi
 /*
@@ -276,7 +280,7 @@ app.put("/update-student/:id", (req, res) => {
 
 app.get("/delete-student/:id", (req, res) => {
   const studentId = req.params.id;
-  const query = "DELETE FROM user WHERE id = ?";
+  const query = "DELETE FROM user WHERE id = ? AND role = 'student'";
   db.query(query, [id], (err, result) => {
     if (err) {
       console.error(err);
