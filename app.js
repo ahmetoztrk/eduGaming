@@ -3,7 +3,7 @@ const mysql = require("mysql2");
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const path = require("path");
-const methodOverride = require('method-override');
+const methodOverride = require("method-override");
 require("dotenv").config();
 
 const pageRoute = require("./routes/pageRouter");
@@ -18,10 +18,9 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
 app.use(
-  methodOverride('_method', {
-    methods: ['POST', 'GET'],
+  methodOverride("_method", {
+    methods: ["POST", "GET"],
   })
 );
 
@@ -54,29 +53,26 @@ db.connect((err) => {
   console.log("Connected to MySQL database.");
 });
 
-
 // Öğrenci güncelleme sayfasını gösteren route
-app.get('/update-student/:id', (req, res) => {
+app.get("/update-student/:id", (req, res) => {
   const studentId = req.params.id;
-  
+
   // Veritabanından öğrenci verisini çek
-  const query = 'SELECT * FROM students WHERE id = ?';
+  const query = "SELECT * FROM students WHERE id = ?";
   db.query(query, [studentId], (err, result) => {
-      if (err) {
-          console.error(err);
-          res.send('Error retrieving student data');
+    if (err) {
+      console.error(err);
+      res.send("Error retrieving student data");
+    } else {
+      if (result.length > 0) {
+        // Öğrenci verisini render işlemi sırasında view'e (EJS'e) gönder
+        res.render("update_student", { student: result[0] });
       } else {
-          if (result.length > 0) {
-              // Öğrenci verisini render işlemi sırasında view'e (EJS'e) gönder
-              res.render('update_student', { student: result[0] });
-          } else {
-              res.send('Student not found');
-          }
+        res.send("Student not found");
       }
+    }
   });
 });
-
-
 
 // Kullanıcı Kaydı (Örnek İşlev)
 app.post("/register", (req, res) => {
@@ -100,7 +96,6 @@ app.post("/register", (req, res) => {
     }
   );
 });
-
 
 app.get("/teacher/dashboard", (req, res) => {
   // Sadece öğretmenler bu sayfayı görebilmeli, role kontrolü ekleyin
@@ -128,7 +123,6 @@ app.get("/teacher/dashboard", (req, res) => {
     res.render("teacher_dashboard", { students: results });
   });
 });
-
 
 app.use("/", pageRoute);
 
@@ -163,7 +157,6 @@ app.post("/login", (req, res) => {
     }
   });
 });
-
 
 app.post("/add-student", (req, res) => {
   const { fullname, email, game_name, score } = req.body;
