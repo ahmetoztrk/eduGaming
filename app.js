@@ -159,10 +159,10 @@ app.post("/login", (req, res) => {
 });
 
 app.post("/add-student", (req, res) => {
-  const { fullname, email, game_name, score } = req.body;
+  const { fullname, email, password, age } = req.body;
   const query =
-    "INSERT INTO user (fullname, email, game_name, score) VALUES (?, ?, ?, ?)";
-  db.query(query, [fullname, email, game_name, score], (err, result) => {
+    "INSERT INTO students (fullname, email, password, age) VALUES (?, ?, ?, ?)";
+  db.query(query, [fullname, email, password, age], (err, result) => {
     if (err) {
       console.error(err);
       return res.send("Error adding student.");
