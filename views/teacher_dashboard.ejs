@@ -103,7 +103,7 @@
     <script>
         function confirmDelete(studentId) {
             if (confirm('Are you sure you want to delete this student?')) {
-                window.location.href = '/delete-student/' + studentId;
+                window.location.href = '/delete-student/' + studentId + '?_method=DELETE';
             }
         }
     </script>

@@ -8,15 +8,15 @@
 </head>
 <body>
     <h1>Update Student</h1>
-    <form action="/update-student/<%= student.id %>" method="PUT">
+    <form action="/update-student/<%= student.id %>" method="POST">
         <label for="fullname">Full Name:</label><br>
         <input type="text" id="fullname" name="fullname" value="<%= student.fullname %>" required><br><br>
         <label for="email">Email:</label><br>
         <input type="email" id="email" name="email" value="<%= student.email %>" required><br><br>
-        <label for="game_name">Game:</label><br>
-        <input type="text" id="game_name" name="game_name" value="<%= student.game_name %>"><br><br>
-        <label for="score">Score:</label><br>
-        <input type="number" id="score" name="score" value="<%= student.score %>"><br><br>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" value="<%= student.password %>"><br><br>
+        <label for="age">Age:</label><br>
+        <input type="number" id="age" name="score" value="<%= student.age %>"><br><br>
         <button type="submit">Update Student</button>
     </form>
 </body>
