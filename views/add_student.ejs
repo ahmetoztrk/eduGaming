@@ -15,9 +15,17 @@
         <input type="email" id="email" name="email" required><br><br>
         <label for="password">Password:</label><br>
         <input type="password" id="password" name="password"><br><br>
-        <label for="age">Score:</label><br>
-        <input type="number" id="age" name="age"><br><br>
-        <button type="submit">Add Student</button>
+        <label for="age">Age:</label>
+        <select id="age" name="age" required>
+            <option value="">Select your age</option>
+            <% for (let i = 13; i <= 20; i++) { %>
+                <option value="<%= i %>"><%= i %></option>
+            <% } %>
+        </select>
+        <div>
+                    <button style="margin-top: 1%;" type="submit">Add Student</button>
+
+        </div>
     </form>
 </body>
 </html>

@@ -109,8 +109,8 @@ app.get("/teacher/dashboard", (req, res) => {
 
   // Öğrenciler ve oyunlarını veritabanından çek
   const query = `
-    SELECT teachers.fullname, teachers.email
-    FROM teachers WHERE teachers.role = 'student';
+    SELECT students.fullname, students.email
+    FROM students;
   `;
 
   db.query(query, (err, results) => {
@@ -173,7 +173,7 @@ app.post("/add-student", (req, res) => {
 
 app.get("/update-student/:id", (req, res) => {
   const studentId = req.params.id;
-  const query = "SELECT * FROM user WHERE id = ?";
+  const query = "SELECT * FROM students WHERE id = ?";
   db.query(query, [studentId], (err, result) => {
     if (err) {
       console.error(err);
@@ -187,7 +187,7 @@ app.put("/update-student/:id", (req, res) => {
   const studentId = req.params.id;
   const { fullname, email, game_name, score } = req.body;
   const query =
-    "UPDATE user SET fullname = ?, email = ?, game_name = ?, score = ? WHERE id = ?";
+    "UPDATE students SET fullname = ?, email = ?, game_name = ?, score = ? WHERE id = ?";
   db.query(
     query,
     [fullname, email, game_name, score, studentId],
@@ -203,7 +203,7 @@ app.put("/update-student/:id", (req, res) => {
 
 app.get("/delete-student/:id", (req, res) => {
   const studentId = req.params.id;
-  const query = "DELETE FROM user WHERE id = ? AND role = 'student'";
+  const query = "DELETE FROM student WHERE id = ? AND role = 'student'";
   db.query(query, [id], (err, result) => {
     if (err) {
       console.error(err);
