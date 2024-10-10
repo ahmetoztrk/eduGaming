@@ -35,7 +35,6 @@ app.use(
     cookie: { secure: false }, // HTTPS kullanıyorsanız 'true' yapabilirsiniz
   })
 );
-
 // MySQL veritabanı bağlantısı
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
