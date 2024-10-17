@@ -91,8 +91,12 @@
                     <td><%= student.score %></td>
                     <td><%= student.date_played %></td>
                     <td>
-                        <a href="/update-student/<%= student.userId %>" class="btn">Update</a>
-                        <button class="btn delete-btn" onclick="confirmDelete('<%= student.userId %>')">Delete</button>
+                        <a href="/update-student/<%= student.id %>" class="btn">Update</a>
+                       <!--<button class="btn delete-btn" onclick="confirmDelete('<%= student.id %>')">Delete</button>--> 
+                        <a href="/delete-student/<%= student.id %>?_method=DELETE" 
+                            onclick="return confirm('ARE YOU SURE?');" 
+                            class="btn delete-btn">Delete</a>
+                         
                     </td>
                 </tr>
             <% }) %>

@@ -212,20 +212,22 @@
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
 
-            <label for="age">Age:</label>
+
+        
+
+          < <label id="role" for="role">Role:</label>
+  <select name="role">
+    <option value="student">Student</option>
+    <option value="teacher">Teacher</option>
+  </select><br><br>
+
+ <label for="age">Age:</label>
             <select id="age" name="age" required>
                 <option value="">Select your age</option>
                 <% for (let i = 13; i <= 20; i++) { %>
                     <option value="<%= i %>"><%= i %></option>
                 <% } %>
             </select>
-
-            <label for="role">Role:</label>
-  <select name="role">
-    <option value="student">Student</option>
-    <option value="teacher">Teacher</option>
-  </select><br><br>
-
             
             <div style="margin-top: 0.5cm;">
                 <label for="school">School:</label>
