@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const session = require("express-session");
 const path = require("path");
 const methodOverride = require("method-override");
-const bcrypt = require("bcrypt"); // 'brcypt' hatası düzeltildi
+const bcrypt = require("bcrypt");
 require("dotenv").config();
 
 const pageRoute = require("./routes/pageRouter");
@@ -194,7 +194,6 @@ app.post("/add-student", (req, res) => {
 app.get("/update-student/:id", (req, res) => {
   const studentId = req.params.id;
   const query = "SELECT * FROM students WHERE id = ?";
-
   db.query(query, [studentId], (err, result) => {
     if (err) {
       console.error(err);
@@ -212,26 +211,19 @@ app.get("/update-student/:id", (req, res) => {
 app.put("/update-student/:id", (req, res) => {
   const studentId = req.params.id;
   const { fullname, email, game_name, score } = req.body;
-  const query =
-    "UPDATE students SET fullname = ?, email = ?, game_name = ?, score = ? WHERE id = ?";
-
-  db.query(
-    query,
-    [fullname, email, game_name, score, studentId],
-    (err, result) => {
-      if (err) {
-        console.error(err);
-        return res.send("Error updating student.");
-      }
-      res.redirect("/teacher/dashboard");
+  const query = "UPDATE students SET fullname = ?, email = ?, game_name = ?, score = ? WHERE id = ?";
+  db.query(query, [fullname, email, game_name, score, studentId], (err, result) => {
+    if (err) {
+      console.error(err);
+      return res.send("Error updating student.");
     }
-  );
+    res.redirect("/teacher/dashboard");
+  });
 });
 
 app.delete("/delete-student/:id", (req, res) => {
   const studentId = req.params.id;
   const query = "DELETE FROM students WHERE id = ?";
-
   db.query(query, [studentId], (err, result) => {
     if (err) {
       console.error(err);
